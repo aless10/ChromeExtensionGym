@@ -23,8 +23,17 @@ imagePreview.addEventListener("change", function() {
 
 
 function addImgElementScript(img) {
+  return 'let imageTag = document.createElement("img");' +
+    'imageTag.id = "extensionImgDiv";' +
+    'imageTag.style.height= "100%";' +
+    'imageTag.style.backgroundPosition = "center";' +
+    'imageTag.style.opacity = "0.5";' +
+    'imageTag.style.backgroundRepeat = "no-repeat";' +
+    'imageTag.style.backgroundSize = "cover";' +
+    'imageTag.src = "' + img + '";' +
+    'document.body.appendChild(imageTag);'
 
-  return 'let imageTag = document.createElement("div");' +
+  /*return 'let imageTag = document.createElement("div");' +
     'imageTag.id = "extensionImgDiv";' +
     'imageTag.style.height= "100%";' +
     'imageTag.style.backgroundPosition = "center";' +
@@ -32,7 +41,7 @@ function addImgElementScript(img) {
     'imageTag.style.backgroundRepeat = "no-repeat";' +
     'imageTag.style.backgroundSize = "cover";' +
     'imageTag.style.backgroundImage = "url(\'' + img + '\')";' +
-    'document.body.appendChild(imageTag);'
+    'document.body.appendChild(imageTag);'*/
 }
 
 function addImageToBackground() {
