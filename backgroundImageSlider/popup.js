@@ -4,7 +4,9 @@ function readURL(input) {
 
 
     reader.onload = function(e) {
-      document.getElementById('blah').src = e.target.result;
+      const preview = document.getElementById('blah')
+      preview.style.display = "block";
+      preview.src = e.target.result;
     };
 
 
@@ -14,23 +16,35 @@ function readURL(input) {
 }
 
 const imagePreview = document.getElementById('imgInp');
+
 imagePreview.addEventListener("change", function() {
   readURL(this);
 });
 
 
+function addImgElementScript(img) {
+
+  return 'let imageTag = document.createElement("div");' +
+    'imageTag.id = "extensionImgDiv";' +
+    'imageTag.style.height= "100%";' +
+    'imageTag.style.backgroundPosition = "center";' +
+    'imageTag.style.opacity = "0.5";' +
+    'imageTag.style.backgroundRepeat = "no-repeat";' +
+    'imageTag.style.backgroundSize = "cover";' +
+    'imageTag.style.backgroundImage = "url(\'' + img + '\')";' +
+    'document.body.appendChild(imageTag);'
+}
+
 function addImageToBackground() {
   const image = document.getElementById('blah').src;
   const image64 = image.replace(/data:image\/png;base64,/, '');
+
 
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
       {
-        code: '' +
-          'const imageTag = document.createElement("img");' +
-          'imageTag.src = "' + image64 + '";' +
-          'document.body.appendChild(imageTag);'
+        code: addImgElementScript(image64)
       });
   });
 
@@ -40,6 +54,10 @@ const addImage = document.getElementById("addImageToPage");
 
 addImage.addEventListener("click", addImageToBackground);
 
+function changeOpacity(value) {
+  return 'document.getElementById("extensionImgDiv").style.opacity = "' + value + '";'
+}
+
 
 const sliderValue = document.getElementById("slider-value");
 
@@ -48,7 +66,7 @@ sliderValue.addEventListener("change", function (e) {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
-      {code: 'console.log(' + opacityValue + ');'});
+      {code: changeOpacity(opacityValue)});
   });
 
 });

@@ -6,8 +6,7 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "activeTab",
-    "storage"
+    "activeTab"
   ],
   "manifest_version": 2
 }
