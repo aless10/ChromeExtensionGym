@@ -31,7 +31,8 @@ function addImgElementScript(img) {
     'imageTag.style.backgroundRepeat = "no-repeat";' +
     'imageTag.style.backgroundSize = "cover";' +
     'imageTag.src = "' + img + '";' +
-    'document.body.appendChild(imageTag);'
+    'const body = document.getElementsByTagName("body")[0];' +
+    'body.insertBefore(imageTag, body.childNodes[0]);';
 
   /*return 'let imageTag = document.createElement("div");' +
     'imageTag.id = "extensionImgDiv";' +
