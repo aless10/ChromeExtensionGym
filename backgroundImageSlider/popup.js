@@ -4,7 +4,6 @@ function readURL(input) {
 
 
     reader.onload = function(e) {
-      console.log(e.target.result);
       document.getElementById('blah').src = e.target.result;
     };
 
@@ -21,14 +20,18 @@ imagePreview.addEventListener("change", function() {
 
 
 function addImageToBackground() {
-  const reader = new FileReader();
   const image = document.getElementById('blah').src;
-  reader.readAsDataURL(image); // convert to base64 string
+  const image64 = image.replace(/data:image\/png;base64,/, '');
 
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
-      {code: 'document.body.style.backgroundImage = url('+ image + ');'});
+      {
+        code: '' +
+          'const imageTag = document.createElement("img");' +
+          'imageTag.src = "' + image64 + '";' +
+          'document.body.appendChild(imageTag);'
+      });
   });
 
 }
@@ -42,11 +45,10 @@ const sliderValue = document.getElementById("slider-value");
 
 sliderValue.addEventListener("change", function (e) {
   const opacityValue = (e.target.value) / 100;
-  console.log(opacityValue);
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
-      {code: 'document.body.style.backgroundImage.opacity = ' + opacityValue + ';'});
+      {code: 'console.log(' + opacityValue + ');'});
   });
 
 });
