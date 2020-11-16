@@ -23,16 +23,19 @@ imagePreview.addEventListener("change", function() {
 
 
 function addImgElementScript(img) {
-  return 'let imageTag = document.createElement("img");' +
+  return 'let imageTag = document.createElement("div");' +
     'imageTag.id = "extensionImgDiv";' +
     'imageTag.style.height= "100%";' +
     'imageTag.style.backgroundPosition = "center";' +
     'imageTag.style.opacity = "0.5";' +
     'imageTag.style.backgroundRepeat = "no-repeat";' +
     'imageTag.style.backgroundSize = "cover";' +
-    'imageTag.src = "' + img + '";' +
+    'imageTag.style.backgroundImage = "url(\'' + img + '\')";' +
     'const body = document.getElementsByTagName("body")[0];' +
-    'body.insertBefore(imageTag, body.childNodes[0]);';
+    'body.childNodes.forEach((item) => {' +
+      'imageTag.appendChild(item)' +
+    '});' +
+    'body.appendChild(imageTag);';
 
   /*return 'let imageTag = document.createElement("div");' +
     'imageTag.id = "extensionImgDiv";' +
