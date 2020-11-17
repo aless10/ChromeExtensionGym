@@ -1,0 +1,12 @@
+{
+  "name": "BgImageSliderExtension",
+  "version": "1.0",
+  "description": "Put an image in background",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "manifest_version": 2
+}

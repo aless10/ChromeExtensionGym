@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Background Image Slider</title>
+        <style>
+            .slidecontainer {
+                width: 100%;
+            }
+        </style>
+</head>
+<body>
+<h3>Background Image Extension</h3>
+<div class="slidecontainer">
+    <p>Background image Opacity</p>
+    <label>
+        <input id="slider-value" type="range" min="0" max="100" value="50">
+    </label>
+</div>
+<form>
+    <input type='file' id="imgInp" />
+    <img style="display: none;" id="blah" width="100px" src="#" alt="your image" />
+</form>
+<button id="addImageToPage">Add the image!</button>
+<script src="popup.js"></script>
+</body>
+</html>
