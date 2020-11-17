@@ -23,29 +23,21 @@ imagePreview.addEventListener("change", function() {
 
 
 function addImgElementScript(img) {
+
   return 'let imageTag = document.createElement("div");' +
     'imageTag.id = "extensionImgDiv";' +
     'imageTag.style.height= "100%";' +
-    'imageTag.style.backgroundPosition = "center";' +
+    'imageTag.style.width= "100%";' +
+    'imageTag.style.position = "fixed";' +
     'imageTag.style.opacity = "0.5";' +
+    'imageTag.style.top = "0px";' +
+    'imageTag.style.left = "0px";' +
+    'imageTag.style.zIndex = "1000";' +
     'imageTag.style.backgroundRepeat = "no-repeat";' +
     'imageTag.style.backgroundSize = "cover";' +
     'imageTag.style.backgroundImage = "url(\'' + img + '\')";' +
     'const body = document.getElementsByTagName("body")[0];' +
-    'body.childNodes.forEach((item) => {' +
-      'imageTag.appendChild(item)' +
-    '});' +
-    'body.appendChild(imageTag);';
-
-  /*return 'let imageTag = document.createElement("div");' +
-    'imageTag.id = "extensionImgDiv";' +
-    'imageTag.style.height= "100%";' +
-    'imageTag.style.backgroundPosition = "center";' +
-    'imageTag.style.opacity = "0.5";' +
-    'imageTag.style.backgroundRepeat = "no-repeat";' +
-    'imageTag.style.backgroundSize = "cover";' +
-    'imageTag.style.backgroundImage = "url(\'' + img + '\')";' +
-    'document.body.appendChild(imageTag);'*/
+    'body.insertBefore(imageTag, body.childNodes[0]);';
 }
 
 function addImageToBackground() {
